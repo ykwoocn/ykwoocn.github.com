@@ -1,3 +1,4 @@
+[toc]
 # synchronized关键字及java的锁升级过程
 
 ## synchronized 作用以及区别
@@ -129,7 +130,11 @@ public class SyncDemo1 {
 
 通过javap 查看SyncDemo1的字节码指令可以看到，在test1和test2方法中都有对应 monitorenter 和 monitorexit 的指令，其实，我们在代码中添加 synchronized 之后，javac编译之后就会将同步关键字包裹的代码 块在进入和退出（或者异常发生时）加上 monitorenter 和 monitorexit 指令；
 
+#### 对象头信息
 
+![64位对象头信息]({{ site.url }}/img/obj_head.png)
+
+简单来说就是对象的mark word前几位记录了获取锁的线程id信息，后面几位记录的是锁的状态（无锁、偏向锁、轻量级锁、重量级锁）
 
 ### 锁升级过程
 
